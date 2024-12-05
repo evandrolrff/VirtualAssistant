@@ -17,6 +17,9 @@ deactivate
 
 pip install SpeechRecognition
 pip install pyaudio
+pip install vosk
+pip install pyttsx3
+pip install sounddevice
 
 # To export a list of all installed packages
 pip freeze > requirements.txt
