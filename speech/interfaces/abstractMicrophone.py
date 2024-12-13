@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 
+from language import LanguageManager
 from speech.TTS import TTS
 
 class Creator(ABC):
@@ -10,7 +11,7 @@ class Creator(ABC):
     implementation of this method.
     """
 
-    def __init__(self, lg_manager) -> None:
+    def __init__(self, lg_manager: LanguageManager) -> None:
         self.language_manager = lg_manager
 
 
@@ -19,11 +20,9 @@ class Creator(ABC):
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
     
 
-    @abstractmethod
     def assistant_speaking(self) -> None:
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
     
     
-    @abstractmethod
     def processes_speech_from_the_microphone(self) -> None:
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")

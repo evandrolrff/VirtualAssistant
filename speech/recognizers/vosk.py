@@ -1,4 +1,5 @@
 from speech.interfaces import Creator
+from language import LanguageManager
 from vosk import Model, KaldiRecognizer
 import sounddevice as sd
 import queue
@@ -7,7 +8,7 @@ import os
 
 
 class VoskMicrophone(Creator):
-    def __init__(self, lg_manager, model_path="model", samplerate=None, blocksize=8000):
+    def __init__(self, lg_manager:LanguageManager, model_path:str="model", samplerate=None, blocksize:int=8000) -> None:
         """
         Inicializa a classe SpeechVosk.
 
@@ -64,7 +65,8 @@ class VoskMicrophone(Creator):
             with sd.RawInputStream(samplerate=self.samplerate, blocksize=self.blocksize,
                                    device=None, dtype="int16", channels=1, callback=self._callback):
                 print("#" * 80)
-                print("Capturando áudio. Pressione Ctrl+C para parar.")
+                print("{} {}".format(self.language_manager.get_message("capturing_audio"), 
+                                     self.language_manager.get_message("cancel_stop_message")))
                 print("#" * 80)
 
                 self.recognizer = KaldiRecognizer(self.model, self.samplerate)
@@ -79,7 +81,7 @@ class VoskMicrophone(Creator):
                     if result:
                         text = eval(result).get("text", "").strip()
                         if text:
-                            print(f"Transcrição: {text}")
+                            print(self.language_manager.get_message_with_fill_string("transcription_with_text", text))
         except KeyboardInterrupt:
             print("\nCaptura encerrada.")
         except Exception as e:

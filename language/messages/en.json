@@ -1,5 +1,10 @@
 {
     "greeting": "Welcome! I'm Alfred your assistant virtual!",
+    "model_utilized": "Model Utilized {}.",
+    "transcription": "Transcription",
+    "transcription_with_text": "Transcription => {}.",
+    "capturing_audio": "Capturing audio.",
     "error": "An error occurred!",
+    "cancel_stop_message": "Press Ctrl+C to stop.",
     "exit": "Goodbye!"
 }
