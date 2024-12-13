@@ -1,6 +1,8 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 
+from speech.TTS import TTS
+
 class Creator(ABC):
     """
     The Creator class declares the factory method that is supposed to return an
@@ -10,8 +12,12 @@ class Creator(ABC):
 
     @abstractmethod
     def start_recognition(self) -> None:
-        """
-        Note that the Creator may also provide some default implementation of
-        the factory method.
-        """
+        raise NotImplementedError("Este método deve ser implementado pela subclasse.")
+    
+    @abstractmethod
+    def assistant_speaking(self) -> None:
+        raise NotImplementedError("Este método deve ser implementado pela subclasse.")
+    
+    @abstractmethod
+    def processes_speech_from_the_microphone(self) -> None:
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
