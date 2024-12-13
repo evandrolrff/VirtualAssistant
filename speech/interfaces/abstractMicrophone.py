@@ -10,13 +10,19 @@ class Creator(ABC):
     implementation of this method.
     """
 
+    def __init__(self, lg_manager) -> None:
+        self.language_manager = lg_manager
+
+
     @abstractmethod
     def start_recognition(self) -> None:
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
     
+
     @abstractmethod
     def assistant_speaking(self) -> None:
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
+    
     
     @abstractmethod
     def processes_speech_from_the_microphone(self) -> None:

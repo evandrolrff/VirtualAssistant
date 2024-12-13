@@ -2,15 +2,18 @@ from speech.interfaces import Creator
 import speech_recognition as sr
 
 class GoogleMicrophone(Creator):
-    def __init__(self, microphone_index=None) -> None:
+    def __init__(self, lg_manager, microphone_index=None) -> None:
         """
         Inicializa o reconhecedor e configura o microfone.
         
         Args:
+            lg_manager (obj): Gerenciador de idiomas.
             microphone_index (int): Índice do microfone, se houver múltiplos dispositivos.
         """
+        super().__init__(lg_manager)
         self.recognition = sr.Recognizer()
         self.microphone = sr.Microphone(device_index=microphone_index)
+
 
     def start_recognition(self) -> None:
         running = True

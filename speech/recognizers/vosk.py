@@ -7,15 +7,17 @@ import os
 
 
 class VoskMicrophone(Creator):
-    def __init__(self, model_path="model", samplerate=None, blocksize=8000):
+    def __init__(self, lg_manager, model_path="model", samplerate=None, blocksize=8000):
         """
         Inicializa a classe SpeechVosk.
 
         Args:
+            lg_manager (obj): Gerenciador de idiomas.
             model_path (str): Caminho para a pasta do modelo Vosk.
             samplerate (int): Taxa de amostragem do microfone. Se None, será detectada automaticamente.
             blocksize (int): Tamanho dos blocos de áudio capturados.
         """
+        super().__init__(lg_manager)
         self.model_path = os.path.join(os.path.dirname(__file__), "model")
 
         if not os.path.exists(self.model_path):
@@ -30,12 +32,14 @@ class VoskMicrophone(Creator):
         self._initialize_model()
         self._initialize_audio_settings()
 
+
     def _initialize_model(self) -> None:
         """Carrega o modelo Vosk."""
         try:
             self.model = Model(self.model_path)
         except Exception as e:
             raise RuntimeError(f"Erro ao carregar o modelo Vosk: {e}")
+
 
     def _initialize_audio_settings(self) -> None:
         """Configura o microfone e obtém a taxa de amostragem padrão."""
@@ -46,11 +50,13 @@ class VoskMicrophone(Creator):
         except Exception as e:
             raise RuntimeError(f"Erro ao configurar o dispositivo de áudio: {e}")
 
+
     def _callback(self, indata, frames, time, status) -> None:
         """Callback chamado para capturar o áudio."""
         if status:
             print(status, file=sys.stderr)
         self.q.put(bytes(indata))
+
 
     def start_recognition(self) -> None:
         """Inicia o reconhecimento de fala em tempo real."""
