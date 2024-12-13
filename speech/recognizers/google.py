@@ -27,6 +27,7 @@ class GoogleMicrophone(Creator):
                 # Reconhecimento de fala
                 text = self.recognition.recognize_google(audio)
                 print(f"You said: {text}")
+                self.assistant_speaking(text)
 
                 # Respostas a comandos
                 if "hello" in text.lower():

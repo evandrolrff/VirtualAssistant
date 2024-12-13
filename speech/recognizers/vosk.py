@@ -82,6 +82,7 @@ class VoskMicrophone(Creator):
                         text = eval(result).get("text", "").strip()
                         if text:
                             print(self.language_manager.get_message_with_fill_string("transcription_with_text", text))
+                            self.assistant_speaking(text)
         except KeyboardInterrupt:
             print("\nCaptura encerrada.")
         except Exception as e:

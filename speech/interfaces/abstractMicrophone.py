@@ -13,6 +13,7 @@ class Creator(ABC):
 
     def __init__(self, lg_manager: LanguageManager) -> None:
         self.language_manager = lg_manager
+        self.my_tts = TTS()
 
 
     @abstractmethod
@@ -20,9 +21,5 @@ class Creator(ABC):
         raise NotImplementedError("Este método deve ser implementado pela subclasse.")
     
 
-    def assistant_speaking(self) -> None:
-        raise NotImplementedError("Este método deve ser implementado pela subclasse.")
-    
-    
-    def processes_speech_from_the_microphone(self) -> None:
-        raise NotImplementedError("Este método deve ser implementado pela subclasse.")
+    def assistant_speaking(self, text: str) -> None:
+        self.my_tts.text_to_speech(text)
