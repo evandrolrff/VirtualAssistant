@@ -1,5 +1,6 @@
 from speech.interfaces import Creator
 import speech_recognition as sr
+import speech.recognizers.NLU.NLUModel as NLUModel
 
 class GoogleMicrophone(Creator):
     def __init__(self, lg_manager, microphone_index=None) -> None:
@@ -17,6 +18,8 @@ class GoogleMicrophone(Creator):
 
     def start_recognition(self) -> None:
         running = True
+        nlu = NLUModel()
+
         while running:
             try:
                 # Captura de áudio
@@ -26,7 +29,9 @@ class GoogleMicrophone(Creator):
 
                 # Reconhecimento de fala
                 text = self.recognition.recognize_google(audio)
-                print(f"You said: {text}")
+
+                prediction = nlu.predict(text)
+                print(f"Texto falado => {text}\nPredição => {prediction}")
                 self.assistant_speaking(text)
 
                 # Respostas a comandos

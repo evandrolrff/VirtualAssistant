@@ -1,0 +1,117 @@
+commands:
+  # Hora
+  - commmand:
+    input:  Que horas são?
+    entity: time
+    action: getTime
+  - commmand:
+    input:  Me digas horas.
+    entity: time
+    action: getTime
+  - commmand:
+    input:  Horas
+    entity: time
+    action: getTime
+  - commmand:
+    input: Que horas são agora?
+    entity: time
+    action: getTime
+  - commmand:
+    input: Pode me dizer as horas?
+    entity: time
+    action: getTime
+  - commmand:
+    input: Tem como saber a hora?
+    entity: time
+    action: getTime
+  - commmand:
+    input: Me diga que horas são.
+    entity: time
+    action: getTime
+  - commmand:
+    input: Que hora é?
+    entity: time
+    action: getTime
+  # Data
+  - commmand:
+    input:  Qual é a data de hoje?
+    entity: time
+    action: getDate
+  - commmand:
+    input:  Data de hoje.
+    entity: time
+    action: getDate
+  - commmand:
+    input:  Data
+    entity: time
+    action: getDate
+  - commmand:
+    input: Qual a data de hoje?
+    entity: time
+    action: getDate
+  - commmand:
+    input: Me diga a data de hoje.
+    entity: time
+    action: getDate
+  - commmand:
+    input: Que dia é hoje?
+    entity: time
+    action: getDate
+  - commmand:
+    input: Hoje é que dia?
+    entity: time
+    action: getDate
+  - commmand:
+    input: Hoje é qual data?
+    entity: time
+    action: getDate
+  # Tempo
+  - commmand:
+    input:  Previsão do tempo
+    entity: weather
+    action: getWeather
+  - commmand:
+    input:  Como está o clima?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input:  Como está o tempo?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input:  Qual o tempo?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Qual a previsão do tempo para hoje?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Vai chover hoje?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Está calor?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Está frio?
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Clima atual
+    entity: weather
+    action: getWeather
+  - commmand:
+    input: Me diga a previsão do tempo
+    entity: weather
+    action: getWeather
+  # Open
+  - commmand:
+    input:  Abrir google
+    entity: open
+    action: 
+  - commmand:
+    input:  Abra youtube
+    entity: open
+    action: 
