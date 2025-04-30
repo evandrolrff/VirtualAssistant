@@ -1,6 +1,6 @@
+from speech.recognizers.NLU.NLUModel import NLUModel
 from speech.interfaces import Creator
 import speech_recognition as sr
-import speech.recognizers.NLU.NLUModel as NLUModel
 
 class GoogleMicrophone(Creator):
     def __init__(self, lg_manager, microphone_index=None) -> None:
@@ -19,6 +19,7 @@ class GoogleMicrophone(Creator):
     def start_recognition(self) -> None:
         running = True
         nlu = NLUModel()
+        nlu.exist_model()
 
         while running:
             try:

@@ -1,4 +1,5 @@
-import speech.recognizers.NLU.NLUModel as NLUModel
+from speech.recognizers.NLU.NLUModel import NLUModel
+from core.AppUtilities import AppUtilities
 from speech.interfaces import Creator
 from language import LanguageManager
 from vosk import Model, KaldiRecognizer
@@ -63,7 +64,8 @@ class VoskMicrophone(Creator):
     def start_recognition(self) -> None:
         """Inicia o reconhecimento de fala em tempo real."""
         nlu = NLUModel()
-
+        nlu.exist_model()
+    
         try:
             with sd.RawInputStream(samplerate=self.samplerate, blocksize=self.blocksize,
                                    device=None, dtype="int16", channels=1, callback=self._callback):
@@ -86,8 +88,13 @@ class VoskMicrophone(Creator):
                         if text:
                             print(self.language_manager.get_message_with_fill_string("transcription_with_text", text))
                             prediction = nlu.predict(text)
+                            
                             print(f"Predição para '{text}': {prediction}")
-                            self.assistant_speaking(text)
+                            if prediction is not None:
+                                result = AppUtilities.What_Should_Do(self.language_manager, prediction)
+                            
+                            print(f"Texto {text} -- Result {result}")
+                            self.assistant_speaking(result)
 
         except KeyboardInterrupt:
             print("\nCaptura encerrada.")

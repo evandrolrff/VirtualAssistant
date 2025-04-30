@@ -1,3 +1,4 @@
+import pickle  # Adicione no topo com os outros imports
 import os
 import yaml
 import numpy as np
@@ -22,15 +23,12 @@ class NLUModel:
         self.model = None
         self.input_data = None
         self.output_data = None
-        self.exist_model()
                
 
     def load_data(self):
         """Carrega os dados do arquivo YAML"""
-        training_path = self.training_path_file
-
         try:
-            data = yaml.safe_load(open(training_path, 'r', encoding='utf-8').read())
+            data = yaml.safe_load(open(self.training_path_file, 'r', encoding='utf-8').read())
             
             self.inputs = []
             self.outputs = []
@@ -104,7 +102,7 @@ class NLUModel:
         print(self.model.summary())
 
 
-    def train(self, epochs=16, batch_size=32):
+    def train(self, epochs=50, batch_size=32):
         """Treina o modelo"""
         if self.model is None:
             print("Modelo não foi construído. Chame build_model() primeiro.")
@@ -162,15 +160,37 @@ class NLUModel:
     def save_model(self, filepath='nlu_model.h5'):
         """Salva o modelo treinado"""
         trained_model = os.path.join(os.path.dirname(__file__), filepath)
+        metadata = {
+            'chr2idx': self.chr2idx,
+            'idx2chr': self.idx2chr,
+            'max_seq': self.max_seq,
+            'label2idx': self.label2idx,
+            'idx2label': self.idx2label
+        }
 
         if self.model:
             self.model.save(trained_model)
-            print(f"Modelo salvo em {trained_model}")
+            # Salva os metadados com extensão .pkl
+            with open(trained_model.replace('.h5', '.pkl'), 'wb') as f:
+                pickle.dump(metadata, f)
+            print(f"Modelo e metadados salvos em {trained_model}")
     
 
     def load_model(self, filepath='nlu_model.h5'):
         """Carrega um modelo previamente treinado"""
+        metadata_path = filepath.replace('.h5', '.pkl')
         self.model = tf.keras.models.load_model(filepath)
+
+        # Carrega os metadados
+        with open(metadata_path, 'rb') as f:
+            metadata = pickle.load(f)
+        
+        # Restaura os parâmetros
+        self.chr2idx = metadata['chr2idx']
+        self.idx2chr = metadata['idx2chr']
+        self.max_seq = metadata['max_seq']
+        self.label2idx = metadata['label2idx']
+        self.idx2label = metadata['idx2label']
 
         # Recompila para evitar o warning das métricas
         self.model.compile(optimizer='adam',
@@ -178,7 +198,7 @@ class NLUModel:
                     metrics=['accuracy'])
         print(f"Modelo carregado de {filepath}")
 
-    
+
     def exist_model(self, filepath='nlu_model.h5'):
         """Verifica se o modelo já existe e carrega ele. Do contrário, treina um novo modelo"""
         trained_model = os.path.join(os.path.dirname(__file__), filepath)
@@ -204,5 +224,5 @@ class NLUModel:
             self.prepare_input_data()
             self.prepare_output_data()
             self.build_model()
-            self.train(epochs=16)
+            self.train(epochs=50)
             self.save_model()
