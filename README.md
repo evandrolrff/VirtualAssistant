@@ -45,7 +45,7 @@ python -m venv my-virtual-env
 my-virtual-env\Scripts\activate
 ```
 
--Linux/MacOS
+- Linux/MacOS
 ```bash
 source my-virtual-env/Scripts/activate.bat
 ```
@@ -74,4 +74,4 @@ python main.py
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the Apache License.
