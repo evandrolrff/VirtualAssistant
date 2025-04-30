@@ -8,6 +8,6 @@ if __name__ == "__main__":
     
     recognizer = SpeechRecognition(lg_manager=lang_manager)
     print(lang_manager.get_message_with_fill_string("model_utilized", recognizer.get_model()))
-
+    
     recognizer.initilize_recognition()
     
