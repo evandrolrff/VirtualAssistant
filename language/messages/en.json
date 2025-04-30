@@ -6,5 +6,17 @@
     "capturing_audio": "Capturing audio.",
     "error": "An error occurred!",
     "cancel_stop_message": "Press Ctrl+C to stop.",
-    "exit": "Goodbye!"
+    "exit": "Goodbye!",
+
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+
+    "get_date": "Today is {}",
+    "get_time": "It's now {}",
+    "get_day_of_week": "Today is {}"
 }
